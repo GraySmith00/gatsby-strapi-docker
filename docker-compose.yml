@@ -1,9 +1,9 @@
 version: '3'
 services:
-  web:
+  gatsby:
     build:
       context: .
-      dockerfile: ./client/Dockerfile
+      dockerfile: ./gatsby/Dockerfile
     ports:
       - '8000:8000'
     volumes:
@@ -12,3 +12,13 @@ services:
     environment:
       - NODE_ENV=development
       - GATSBY_WEBPACK_PUBLICPATH=/
+      - ENABLE_GATSBY_REFRESH_ENDPOINT=true
+  strapi:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    image: strapi/strapi
+    volumes:
+      - ./:/srv/app
+    ports:
+      - '1337:1337'
