@@ -2,8 +2,8 @@ version: '3'
 services:
   gatsby:
     build:
-      context: .
-      dockerfile: ./gatsby/Dockerfile
+      context: ./gatsby
+      dockerfile: Dockerfile
     ports:
       - '8000:8000'
     volumes:
@@ -15,10 +15,10 @@ services:
       - ENABLE_GATSBY_REFRESH_ENDPOINT=true
   strapi:
     build:
-      context: .
-      dockerfile: ./client/Dockerfile
-    image: strapi/strapi
+      context: ./strapi
+      dockerfile: Dockerfile
     volumes:
-      - ./:/srv/app
+      - /app/node_modules
+      - .:/app
     ports:
       - '1337:1337'
