@@ -3,10 +3,12 @@ FROM node:12
 # Also exposing VSCode debug ports
 EXPOSE 1337
 
-WORKDIR /app
+WORKDIR /strapi-app
 
 COPY ./package.json .
 RUN yarn install && yarn cache clean
 COPY . .
 
-CMD ["yarn", "start"]
+RUN ls -l
+
+CMD ["yarn", "develop"]
